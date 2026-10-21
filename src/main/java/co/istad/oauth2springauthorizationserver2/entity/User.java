@@ -1,6 +1,7 @@
 
 package co.istad.oauth2springauthorizationserver2.entity;
 
+import co.istad.oauth2springauthorizationserver2.enums.Role;
 import jakarta.persistence.*;
 import java.util.UUID;
 
@@ -18,8 +19,9 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String role = "USER";
+    private Role role = Role.USER;
 
     @Column(nullable = false)
     private boolean enabled = true;
@@ -47,11 +49,11 @@ public class User {
         this.password = password;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 
