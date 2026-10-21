@@ -1,4 +1,3 @@
-
 package co.istad.oauth2springauthorizationserver2.service;
 
 import co.istad.oauth2springauthorizationserver2.repository.UserRepository;
@@ -18,15 +17,23 @@ public class CustomUserDetailsService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username)
+            throws UsernameNotFoundException {
 
         var user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
+                .orElseThrow(() ->
+                        new UsernameNotFoundException(
+                                "User not found: " + username
+                        )
+                );
 
-        return User
-                .withUsername(user.getUsername())
+        String[] authorities = user.getRoles().stream()
+                .map(role -> "ROLE_" + role.getName())
+                .toArray(String[]::new);
+
+        return User.withUsername(user.getUsername())
                 .password(user.getPassword())
-                .roles(user.getRole().name())
+                .authorities(authorities)
                 .disabled(!user.isEnabled())
                 .build();
     }
