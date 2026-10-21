@@ -1,8 +1,8 @@
-
-package co.istad.oauth2springauthorizationserver2.service;
+ package co.istad.oauth2springauthorizationserver2.service;
 
 import co.istad.oauth2springauthorizationserver2.dto.UserRegistrationRequest;
 import co.istad.oauth2springauthorizationserver2.entity.User;
+import co.istad.oauth2springauthorizationserver2.enums.Role;
 import co.istad.oauth2springauthorizationserver2.repository.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -35,7 +35,7 @@ public class UserService {
         User user = new User();
         user.setUsername(request.username());
         user.setPassword(passwordEncoder.encode(request.password()));
-        user.setRole("USER");
+        user.setRole(Role.USER);
         user.setEnabled(true);
 
         userRepository.save(user);
