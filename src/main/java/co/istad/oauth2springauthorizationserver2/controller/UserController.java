@@ -2,7 +2,7 @@
 package co.istad.oauth2springauthorizationserver2.controller;
 
 import co.istad.oauth2springauthorizationserver2.dto.UserRegistrationRequest;
-import co.istad.oauth2springauthorizationserver2.service.UserService;
+import co.istad.oauth2springauthorizationserver2.service.UserServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -13,10 +13,10 @@ import java.util.Map;
 @RequestMapping("/api/v1/users")
 public class UserController {
 
-    private final UserService userService;
+    private final UserServiceImpl userServiceImpl;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
+    public UserController(UserServiceImpl userServiceImpl) {
+        this.userServiceImpl = userServiceImpl;
     }
 
     @PostMapping("/register")
@@ -24,7 +24,7 @@ public class UserController {
     public Map<String, String> register(
             @Valid @RequestBody UserRegistrationRequest request) {
 
-        userService.register(request);
+        userServiceImpl.register(request);
 
         return Map.of("message", "User registered successfully");
     }
