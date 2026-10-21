@@ -1,6 +1,7 @@
 
 package co.istad.oauth2springauthorizationserver2.controller;
 
+import co.istad.oauth2springauthorizationserver2.dto.CreateRoleRequest;
 import co.istad.oauth2springauthorizationserver2.entity.Role;
 import co.istad.oauth2springauthorizationserver2.service.RoleService;
 import org.springframework.http.HttpStatus;
@@ -30,6 +31,5 @@ public class RoleController {
         return roleService.getAllRoles();
     }
 
-    public record CreateRoleRequest(String name, String description
-    ) {}
+
 }
